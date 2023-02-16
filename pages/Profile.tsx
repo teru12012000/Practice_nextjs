@@ -1,45 +1,47 @@
 import Header from '@/components/Header';
+import Tempalte from '@/components/Tempalte';
 import Title from '@/components/Title';
-import Head from 'next/head'
-type skill={
-  language:string;
-  thought:string;
+export type profiledeta={
+  question:string;
+  answer:string;
 }
 const Profile = () => {
-  const skills:string[]=[
-    "C",
-    "C++",
-    "Javascript",
-    "php",
-    "python"
-  ];
+  const deta:profiledeta[]=[
+    {
+      question:"名前",
+      answer:"TERUSI",
+    },{
+      question:"誕生日",
+      answer:"2000/12/1"
+    },{
+      question:"好きな食べ物",
+      answer:"焼肉、ラーメン"
+    }
+  ]
   return (
     <>
       <Title 
         title={'プロフィール'}
         detail={'これはプロフィールのページです。'}
       />
-      <Header/>
-      <div className='conteiner text-center'>
-        <h1>スキル</h1>
-        <ul 
+      <Header
+        home={true}
+      />
+      <Tempalte
+        title="プロフィール"
+      >
+      {deta.map((item:profiledeta,index:number)=>(
+        <li 
+          key={index}
           style={{
-            listStyle:"none"
+            fontSize:"20px",
+            marginTop:"20px"
           }}
         >
-          {skills.map((item:string,index:number)=>(
-            <li 
-              key={index}
-              style={{
-                fontSize:"20px",
-                marginTop:"20px"
-              }}
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
+          {item.question}：<span>{item.answer}</span>
+        </li>
+      ))}
+    </Tempalte>
     </>
   );
 }
